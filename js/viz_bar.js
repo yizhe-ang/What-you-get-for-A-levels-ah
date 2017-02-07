@@ -55,6 +55,9 @@
 	//         sortBars();
 	//     });
 
+
+
+	// FUNCTION THAT UPDATES POSITON OF BARS
 	viz.sortBars = function(data) {
 		yScale.domain(data.map(function(d) { return d.course; }));
 		yAxis.scale(yScale);

@@ -1,32 +1,33 @@
 key,faculty,course,uas
-31,law,Law,85.0
-30,medicine,Medicine,85.0
-29,medicine,Nursing,70.0
-28,medicine,Dentistry,85.0
-27,design,Architecture,80.0
-26,design,Industrial Design,78.75
-25,design,Project & Facilities Mgmt.,76.25
-24,design,Real Estate,76.25
-23,engineering,Engineering,78.75
-22,engineering,Biomedical Engr.,77.5
-21,engineering,Chemical Engr.,83.75
-20,engineering,Civil Engr.,76.25
-19,engineering,Electrical Engr.,75.0
-18,engineering,Environmental Engr.,75.0
-17,engineering,Engr. Science,81.25
-16,engineering,Industrial & Systems Engr.,80.0
-15,engineering,Materials Science & Engr.,76.25
-14,engineering,Mechanical Engr.,80.0
-13,engineering,Mechanical Engr. (Aero),85.0
-12,computing,Business Analytics,85.0
-11,computing,Computer Science,85.0
-9,computing,Information Security,81.25,computing,Information Systems,80.0
-8,computing,Computer Engr.,80.0
-7,science,Pharmacy,85.0
-6,science,Science,77.5
-5,science,Data Science & Analytics,80.0
-4,business,Business Admin,82.5
-3,business,Accountancy,85.0
-2,fass,Arts & Social Sciences,78.75
-1,fass,Arts & Social Sciences (MT),75.0
-0,environment,Environmental Studies,85.0
+32,law,Law,85.0
+31,medicine,Medicine,85.0
+30,medicine,Nursing,70.0
+29,medicine,Dentistry,85.0
+28,design,Architecture,80.0
+27,design,Industrial Design,78.75
+26,design,Project & Facilities Mgmt.,76.25
+25,design,Real Estate,76.25
+24,engineering,Engineering,78.75
+23,engineering,Biomedical Engr.,77.5
+22,engineering,Chemical Engr.,83.75
+21,engineering,Civil Engr.,76.25
+20,engineering,Electrical Engr.,75.0
+19,engineering,Environmental Engr.,75.0
+18,engineering,Engr. Science,81.25
+17,engineering,Industrial & Systems Engr.,80.0
+16,engineering,Materials Science & Engr.,76.25
+15,engineering,Mechanical Engr.,80.0
+14,engineering,Mechanical Engr. (Aero),85.0
+13,computing,Business Analytics,85.0
+12,computing,Computer Science,85.0
+11,computing,Information Security,81.25
+10,computing,Information Systems,80.0
+9,computing,Computer Engr.,80.0
+8,science,Pharmacy,85.0
+7,science,Science,77.5
+6,science,Data Science & Analytics,80.0
+5,business,Business Admin,82.5
+4,business,Accountancy,85.0
+3,fass,Arts & Social Sciences,78.75
+2,fass,Arts & Social Sciences (MT),75.0
+1,environment,Environmental Studies,85.0

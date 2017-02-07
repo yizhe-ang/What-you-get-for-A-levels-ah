@@ -6,30 +6,30 @@
 	// GENERAL RESET FUNCTION
 	// simply resets the working data
 	var resetData = function() {
-		viz.data = [];
-		viz.initData.forEach(function(object) {
-			viz.data.push(object);
-		});
+		viz.keyDim.filter();
+		viz.courseDim.filter();
+		viz.uasDim.filter();
 	};
 
 
 	// GENERAL SORT FUNCTION
-	var sortData = function() {
+	var sortData = function(data) {
 		if (sortStatus === null) { // does nothing if sort is not toggled
 			return;
 		}	
 
 		else if (sortStatus) { // sorts descending if true
-			viz.data.sort(function(a, b) {
+			data.sort(function(a, b) {
 				return parseFloat(b.uas)-parseFloat(a.uas);
 			});
 		}
 		
 		else { // sorts ascending if toggled again
-			viz.data.sort(function(a, b) {
+			data.sort(function(a, b) {
 				return parseFloat(a.uas)-parseFloat(b.uas);
 			});
 		}
+		return data;
 	};
 
 
@@ -46,9 +46,10 @@
 			sortStatus = false;
 		}
 		sortStatus = !sortStatus;
-		sortData();
+		var data = viz.keyDim.top(Infinity);
+		data = sortData(data);
 		// update the bar chart
-		viz.sortBars(viz.data);
+		viz.sortBars(data);
 	});
 
 
@@ -62,7 +63,7 @@
 	resetButton.on('click', function(d) {
 		resetData();
 		sortStatus = null; // resets sort status too
-		viz.updateBar(viz.data);
+		viz.updateBar();
 	});
 
 
@@ -98,7 +99,7 @@
 			var totalUAS = calculateGrade();
 			// filters courses according to computed UAS
 			console.log(totalUAS);
-			filterCoursesUAS(totalUAS);
+			filterByUAS(totalUAS);
 			sortData();
 			viz.updateBar(viz.data);
 		}
@@ -122,7 +123,7 @@
 	};
 
 	// function that filters dataset based on UAS score
-	var filterCoursesUAS = function(totalUAS) {
+	var filterByUAS = function(totalUAS) {
 		// resets working data first
 		resetData();
 		viz.data = viz.data.filter(function(d) {
@@ -132,26 +133,27 @@
 		
 	};
 
-	// function that filters out dataset based on faculty 
-	var filterByFaculty = function(faculty, checked) {
-		// viz.data = viz.data.filter(function(d) {
-		// 	return d.faculty != faculty;
-		// });
-		// console.log(viz.data);
-		if (checked) {
-			viz.facultyData.filter();
 
-		}
-
-		else {
-			viz.facultyDim.filterFunction(function(d) {
-				return d != faculty;
-			});
-			var data = viz.keyDim.top(Infinity);
-		}
-		
-		console.log(data);
-
+	// function that checks through all the filter inputs and updates the crossfilter accordinly
+	var filterByCourse = function() {
+		// resets the course filter first
+		viz.courseDim.filter();
+		// list of courses to be included
+		var filterList = [];
+		// selects all inputs and starts the loop
+		coursesInput.each(function() {
+			var input = d3.select(this);
+			var checked = input.property('checked');
+			var course = input.property('name');
+			// if checked, filter for that course
+			if (checked) {
+				filterList.push(course);
+			}
+		});
+		viz.courseDim.filter(function(d) {
+			// if course is in filter list, filter for it
+			return filterList.indexOf(d) > -1;
+		})
 	};
 
 
@@ -160,27 +162,38 @@
 	// FILTER COURSES
 	
 	var facultyInput = d3.selectAll('label.faculty-checkbox input');
+	var coursesInput  = d3.selectAll('label.course-checkbox input');
 
-	// when label is clicked, check for the checked value and filter accordingly
+	// when FACULTY LABEL is clicked, update the checkboxes of the rest of the courses
+	// then updates the crossfilter
 	facultyInput.on('change', function() {
 
 		var input = d3.select(this);
 
-		console.log(input.property('checked'));
 		var checked = input.property('checked');
+		console.log(checked);
 		var faculty = input.property('name');
 		console.log(faculty);
 
-		if (checked) { // if checked, all courses from this faculty are included
+		// uncheck/check the rest of the courses
+		d3.selectAll('label.'+faculty+' input') 
+			.each(function() {
+			var input = d3.select(this);
 
-		}
+			input.property('checked', checked);
+		});
 
-		else { // if unchecked, filter out all courses from this faculty
-			filterByFaculty(faculty);
-		}
-
+		filterByCourse();
 		viz.updateBar();
 
 	});
+
+	// when COURSE LABEL is changed, loop through all the inputs and 
+	// update the crossfilter and hence bar chart
+	coursesInput.on('change', function() {
+		filterByCourse();
+		viz.updateBar();
+	});
+
 
 }(window.viz = window.viz || {}));
