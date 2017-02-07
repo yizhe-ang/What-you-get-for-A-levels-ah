@@ -1,0 +1,460 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+
+/* HEADER SHIZZ */
+
+header {
+	padding:0px;
+	margin:0px;
+	width: 100%;
+	height:auto;
+	top:0;
+	left:0;
+	z-index: 999;
+	/*background-image: url('img/ignasi_pattern_s.png');*/
+	/* Background pattern from subtlepatterns.com */
+	background-color:white;
+	border-bottom: 1px solid lightgrey;
+
+	-webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.16);
+}
+
+header #title {
+	padding-top:10px;
+	padding-bottom: 20px;
+	max-width: 960px;
+	height: auto;
+	margin: 0 auto;
+}
+
+h1#logo {
+	margin-top:0;
+	margin-bottom:10px;
+	text-align: center;
+	font-family: 'Vidaloka', serif;
+	font-size:48px;
+	font-weight:600;
+}
+
+#grades-input {
+	max-width: 400px;
+	height: auto;
+	margin: 0 auto;
+	font-family: 'Overpass', sans-serif;
+	font-weight:600;
+	font-size: 48px;
+}
+
+
+
+/* SIDEBAR SHIZZ */
+#sidebar {
+	z-index: 99;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: -300px;
+	width: 300;
+	padding-top: 30px;
+	/*padding: 30px;*/
+	background-color: white;
+	border: 1px solid gainsboro;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; 
+}
+
+.toggle {
+	position:fixed;
+	top: 120px;
+	left: 300px;
+	z-index:1000;
+	text-decoration: none;
+	font-size: 16px;
+	font-family: 'Overpass Mono', monospace;
+	color: gray;
+	cursor: pointer;
+}
+
+#sidebartoggler {
+	display:none;
+}
+
+#sidebartoggler:checked ~ #sidebar {
+	left: 0px;
+}
+
+/* FILTER LABELS SHIZZ */
+
+.control {
+	font-family: 'Overpass', sans-serif;
+	font-size: 18px;
+	position: relative;
+	display:block;
+	/*margin-bottom: 15px;*/
+	padding-left: 45px;
+	cursor:pointer;
+}
+
+.control input {
+	position: absolute;
+	z-index:-1;
+	opacity:0;
+}
+
+.control__indicator {
+	position: absolute;
+	top: 0px;
+	left: 15px;
+	width: 20px;
+	height: 20px;
+	background: #e6e6e6;
+}
+/* Hover and focus states */
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+	background: #ccc;
+}
+/* Checked state */
+.control input:checked ~ .control__indicator {
+	background: #2aa1c0;
+}
+/* Hover state whilst checked */
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+	background: #0e647d;
+}
+/* Check mark */
+.control__indicator:after {
+	position: absolute;
+	display: none;
+	content: '';
+}
+/* Show check mark */
+.control input:checked ~ .control__indicator:after {
+	display: block;
+}
+/* Checkbox tick */
+.control--checkbox .control__indicator:after {
+	top: 4px;
+	left: 8px;
+	width: 3px;
+	height: 8px;
+	transform: rotate(45deg);
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+}
+
+
+
+
+/* buttons */
+button#sort-button:hover{
+	cursor: pointer;
+	background-color: gainsboro;
+}
+button#reset-button:hover{
+	cursor: pointer;
+	background-color: dimgrey;
+}
+button#reset-button:active {
+	background-color: black;
+}
+button#sort-button:active {
+	background-color: silver;
+}
+    button#sort-button {
+      font-family: 'Overpass', sans-serif;
+      background: transparent; outline: none;
+      position: relative;
+      border: 2px solid #111;
+      padding: 10px 40px;
+      overflow: hidden;
+      letter-spacing: 3px;
+      font-weight: 600;
+      font-size: 14px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+      -moz-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s; 
+      display: block;
+    }
+
+     button#reset-button {
+      font-family: 'Overpass', sans-serif;
+      background: grey; outline: none;
+      color: white;
+      position: relative;
+      border: 2px solid #111;
+      padding: 10px 35px;
+      overflow: hidden;
+      letter-spacing: 3px;
+      font-weight: 600;
+      font-size: 14px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+      -moz-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s; 
+      display: block;
+    }
+
+
+/* ACCORDION SHIZZ */
+.tab-group {
+	margin: 30px 0;
+	width: 100%;
+	/*padding: 30px;*/
+}
+
+.tab {
+	position: relative;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.tab input {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -999;
+	opacity: 0;
+}
+
+.tab label:nth-child(1) {
+	display: inline;
+	margin-right: 3px;
+}
+
+.tab label:nth-child(3) {
+	display: inline;
+	transition: letter-spacing .55s;
+	font-family: 'Overpass', sans-serif;
+	font-size: 18px;
+}
+
+
+.tab label:hover {
+	cursor: pointer;
+}
+
+/* when + is hovered or focused */
+/*.tab input:focus + label,
+.tab label:hover {
+	color: red;
+}
+*/
+.tab input:checked + label {
+	color: red;
+}
+
+.tab-content {
+	max-height: 0;
+	overflow: hidden;
+	transition: all 1.0s;
+	margin: 10px 0;
+	padding-right: 20px;
+	background-color: gainsboro;
+
+}
+
+.filter-label {
+	width: auto;
+	display: block;
+	padding: 10px 0;
+	/*padding: 10px 0;*/
+}
+
+
+.tab input:checked ~ .tab-content {
+	max-height: 1000px;
+}
+
+
+
+/* INPUT SHIZZ */
+input[type='text'] {
+	display: inline-block;
+	margin: 0;
+	width: 50px;
+	font-family: 'Overpass', sans-serif;
+	font-size: 48px;
+	font-weight: 600;
+	appearance: none;
+	box-shadow: none;
+	border-radius: none;
+	padding: 0;
+	border: none;
+	border-bottom: solid 2px gainsboro;
+	transition: border 0.3s;
+	text-align: center;
+	text-transform: uppercase;
+}
+input[type='text']:focus {
+	outline: none;
+	border-bottom: solid 2px dimgrey;
+}
+input[type='text']:not(:focus):placeholder-shown {
+	border-bottom: solid 2px gainsboro;
+}
+input[type='text']:not(:placeholder-shown) {
+	border-bottom: solid 2px dimgrey;
+}
+input[type='text']:invalid {
+	border-bottom: solid 2px red;
+	color: gainsboro;
+}
+
+
+
+
+
+
+
+/* CHART SHIZZ STARTS HERE*/
+
+svg {
+	position:relative;
+	z-index: 0;
+}
+
+#chart {
+     max-width: 960px;
+     margin: 0 auto;
+}
+
+.x_axis {
+	position:fixed;
+
+}
+
+.x_axis path,
+.x_axis line {
+	fill:none;
+	stroke:none;
+	shape-rendering: crispEdges;
+}
+
+.y_axis path,
+.y_axis line {
+	fill:none;
+	stroke:black;
+	shape-rendering: crispEdges;
+}
+
+
+.y_axis text,
+.x_axis text {
+	font-family: 'Overpass', sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.grid .tick {
+	stroke: lightgrey;
+	stroke-opacity: 1.0;
+	shape-rendering: crispEdges;
+}
+
+.grid path {
+	stroke-width: 0;
+}
+
+/* BARS COLORS */
+.engineering {
+	fill:#89BABE;
+}
+.science {
+	fill:#E0F0B0;
+}
+.design {
+	fill:#F79273;
+}
+.fass {
+	fill:#F0EBB0;
+}
+.business{
+	fill:#F0DBB0;
+}
+.computing {
+	fill:#99D1B7;
+}
+.medicine {
+	fill:#F0B0B2;
+}
+.law {
+	fill:#DEABC9;
+}
+.environment {
+	fill:aquamarine;
+}
+
+/* rect shenenigains */
+/*rect {
+        -moz-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s; 
+}*/
+
+rect:hover {
+	fill:dimgray;
+}
+
+/* TOOLTIP */
+#tooltip {
+	position: absolute;
+	width: auto;
+	height: auto;
+	padding: 5px 12px;
+	background-color: white;
+	border: 2px solid rgba(211,211,211,0.5);
+        /*-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);*/
+    pointer-events: none;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s; 
+    z-index: 5;
+}
+
+#tooltip.hidden {
+	display: none;
+}
+
+#tooltip p {
+	margin:0;
+}
+
+#course_name {
+	margin: 0;
+	font-family: 'Overpass', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+
+}
+
+#uas_value {
+	margin: 0;
+	font-family: 'Overpass Mono', monospace;
+	font-size: 32px;
+	font-weight: 600;
+	display: inline-block;
+	padding-top: 7px;
+
+}

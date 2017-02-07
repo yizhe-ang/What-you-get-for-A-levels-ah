@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NUS UAS Barchart</title>
+        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <link rel='stylesheet' href='style.css' media='screen' />
+        <link href="https://fonts.googleapis.com/css?family=Vidaloka|Overpass+Mono|Overpass:400,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-teal.min.css" />
+      <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    </head>
+    <body>
+        <!-- filter toggle elements -->
+        <input type='checkbox' id='sidebartoggler'>
+        <label for='sidebartoggler' class='toggle'>filters</label>
+        <!-- HEADER STARTS HERE -->
+        <header>
+            <!-- TITLE OF VISUALIZATION -->
+            <div id='title'>
+                <h1 id='logo'>What you get for your 'A' Levels ah?</h1>
+                <!-- grades input -->
+                <div id='grades-input'>
+                    <input type='text' placeholder=' ' name='1' maxlength='1' pattern='[a-eA-EusUS]{1}' title='please enter a valid grade'>
+                    <input type='text' placeholder=' ' name='2' maxlength='1' pattern='[a-eA-EusUS]{1}' title='please enter a valid grade'>
+                    <input type='text' placeholder=' ' name='3' maxlength='1' pattern='[a-eA-EusUS]{1}' title='please enter a valid grade'>
+                    <span>/</span>
+                    <input type='text' placeholder=' ' name='4' maxlength='1' pattern='[a-eA-EusUS]{1}' title='please enter a valid grade'>
+                    <input type='text' placeholder=' ' name='5' maxlength='1' pattern='[a-eA-EusUS]{1}' title='please enter a valid grade'>
+                    <input type='text' placeholder=' ' name='6' maxlength='1' pattern='[a-eA-EusUS]{1}' title='please enter a valid grade'>
+                </div>
+            </div>
+        </header>
+        <!-- SIDEBAR STARTS HERE -->
+        <div id='sidebar'>
+            <button id='reset-button'><div>RESET</div></button>
+            <button id='sort-button'><div>SORT</div></button>
+            <!-- Filters -->
+            <div class='tab-group'>
+                <!-- ENGINEERING -->
+                <!-- tab -->
+                <div class='tab'>
+                    <!-- filter trigger -->
+                    
+                    <label class='control control--checkbox faculty-checkbox'>Engineering
+                        <input type='checkbox' checked='checked' name='engineering'/>
+                        <div class='control__indicator'></div>
+                    </label>
+                    
+                    <!-- tab trigger -->
+                    <input id='tab-one' type='radio' name='tabs'>
+                    <label for='tab-one'>+</label>
+                
+                    <!-- tab content -->
+                    <div class='tab-content'>
+                        <div class='filter-label'>
+                        <label class='control control--checkbox'>Chemical Engineering
+                            <input type='checkbox' checked='checked'/>
+                            <div class='control__indicator'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox'>Engineering
+                            <input type='checkbox' checked='checked'/>
+                            <div class='control__indicator'></div>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- CHART STARTS HERE -->
+        <div id='chart'> 
+            <!-- TOOLTIP -->
+            <div id='tooltip'>
+                <p><span id='course_name'></span></p>
+                <p><span id='uas_value'></span></p>
+            </div>
+        </div>
+<!-- 
+        <script src='chart.js'></script> -->
+        <script src='js/crossfilter.min.js'></script>
+        <script src='js/viz_core.js'></script>
+        <script src='js/viz_bar.js'></script>
+        <script src='js/viz_menu.js'></script>
+        <script src='js/viz_main.js'></script>
+    </body>
+</html>
