@@ -41,58 +41,346 @@
             <button id='sort-button'><div>SORT</div></button>
             <!-- Filters -->
             <div class='tab-group'>
+                <!-- LAW -->
+                <div class='tab'>
+                    <label class='control control--checkbox course-checkbox law'>Law
+                        <input type='checkbox' checked='checked' name='Law'/>
+                        <div class='control__indicator law'></div>
+                </div>
+
+
+                <!-- MEDICINE/DENTISTRY -->
+                <div class='tab'>
+                    <!-- filter trigger -->
+                    <label class='control control--checkbox faculty-checkbox'>Medicine/Dentistry
+                        <input type='checkbox' checked='checked' name='medicine'/>
+                        <div class='control__indicator medicine'></div>
+                    </label>
+                    <!-- tab trigger -->
+                    <input id='tab-medicine' type='checkbox' name='tabs'>
+                    <label for='tab-medicine'>+</label>
+
+                    <!-- tab content -->
+                    <div class='tab-content'>
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox medicine'>Medicine
+                            <input type='checkbox' checked='checked' name='Medicine'/>
+                            <div class='control__indicator medicine'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox medicine'>Nursing
+                            <input type='checkbox' checked='checked' name='Nursing'/>
+                            <div class='control__indicator medicine'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox medicine'>Dentistry
+                            <input type='checkbox' checked='checked' name='Dentistry'/>
+                            <div class='control__indicator medicine'></div>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- DESIGN & ENVIRONMENT -->
+                <div class='tab'>
+                    <!-- filter trigger -->
+                    <label class='control control--checkbox faculty-checkbox'>Design &amp Environment
+                        <input type='checkbox' checked='checked' name='design'/>
+                        <div class='control__indicator design'></div>
+                    </label>
+                    <!-- tab trigger -->
+                    <input id='tab-design' type='checkbox' name='tabs'>
+                    <label for='tab-design'>+</label>
+
+                    <div class='tab-content'>
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox design'>Architecture
+                            <input type='checkbox' checked='checked' name='Architecture'/>
+                            <div class='control__indicator design'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox design'>Industrial Design
+                            <input type='checkbox' checked='checked' name='Industrial Design'/>
+                            <div class='control__indicator design'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox design'>Project &amp Facilities Mgmt.
+                            <input type='checkbox' checked='checked' name='Project & Facilities Mgmt.'/>
+                            <div class='control__indicator design'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox design'>Real Estate
+                            <input type='checkbox' checked='checked' name='Real Estate'/>
+                            <div class='control__indicator design'></div>
+                        </label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
                 <!-- ENGINEERING -->
+                <div class='tab'>
+                    <!-- filter trigger -->
+                    <label class='control control--checkbox faculty-checkbox'>Engineering
+                        <input type='checkbox' checked='checked' name='engineering'/>
+                        <div class='control__indicator engineering'></div>
+                    </label>
+                    <!-- tab trigger -->
+                    <input id='tab-engineering' type='checkbox' name='tabs'>
+                    <label for='tab-engineering'>+</label>
+
+                    <!-- tab content -->
+                    <div class='tab-content'>
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Engineering
+                            <input type='checkbox' checked='checked' name='Engineering'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Biomedical Engr.
+                            <input type='checkbox' checked='checked' name='Biomedical Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Chemical Engr.
+                            <input type='checkbox' checked='checked' name='Chemical Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Civil Engr.
+                            <input type='checkbox' checked='checked' name='Civil Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Electrical Engr.
+                            <input type='checkbox' checked='checked' name='Electrical Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Environmental Engr.
+                            <input type='checkbox' checked='checked' name='Environmental Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Engr. Science
+                            <input type='checkbox' checked='checked' name='Engr. Science'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Industrial &amp Systems Engr.
+                            <input type='checkbox' checked='checked' name='Industrial & Systems Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Materials Science &amp Engr.
+                            <input type='checkbox' checked='checked' name='Materials Science & Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Mechanical Engr.
+                            <input type='checkbox' checked='checked' name='Mechanical Engr.'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox engineering'>Mechanical Engr. (Aero)
+                            <input type='checkbox' checked='checked' name='Mechanical Engr. (Aero)'/>
+                            <div class='control__indicator engineering'></div>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- COMPUTING -->
                 <!-- tab -->
                 <div class='tab'>
                     <!-- filter trigger -->
-                    
                     <label class='control control--checkbox faculty-checkbox'>Computing
                         <input type='checkbox' checked='checked' name='computing'/>
-                        <div class='control__indicator'></div>
+                        <div class='control__indicator computing'></div>
                     </label>
-                    
                     <!-- tab trigger -->
-                    <input id='tab-one' type='radio' name='tabs'>
-                    <label for='tab-one'>+</label>
+                    <input id='tab-computing' type='checkbox' name='tabs'>
+                    <label for='tab-computing'>+</label>
                 
                     <!-- tab content -->
                     <div class='tab-content'>
                         <div class='filter-label'>
                         <label class='control control--checkbox course-checkbox computing'>Business Analytics
                             <input type='checkbox' checked='checked' name='Business Analytics'/>
-                            <div class='control__indicator'></div>
+                            <div class='control__indicator computing'></div>
                         </label>
                         </div>
 
                         <div class='filter-label'>
                         <label class='control control--checkbox course-checkbox computing'>Computer Science
                             <input type='checkbox' checked='checked' name='Computer Science'/>
-                            <div class='control__indicator'></div>
+                            <div class='control__indicator computing'></div>
                         </label>
                         </div>
 
                         <div class='filter-label'>
                         <label class='control control--checkbox course-checkbox computing'>Information Security
                             <input type='checkbox' checked='checked' name='Information Security'/>
-                            <div class='control__indicator'></div>
+                            <div class='control__indicator computing'></div>
                         </label>
                         </div>
 
                         <div class='filter-label'>
                         <label class='control control--checkbox course-checkbox computing'>Information Systems
                             <input type='checkbox' checked='checked' name='Information Systems'/>
-                            <div class='control__indicator'></div>
+                            <div class='control__indicator computing'></div>
                         </label>
                         </div>
 
                         <div class='filter-label'>
                         <label class='control control--checkbox course-checkbox computing'>Computer Engr.
                             <input type='checkbox' checked='checked' name='Computer Engr.'/>
-                            <div class='control__indicator'></div>
+                            <div class='control__indicator computing'></div>
                         </label>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- SCIENCE -->
+                <div class='tab'>
+                    <!-- filter trigger -->
+                    <label class='control control--checkbox faculty-checkbox'>Science
+                        <input type='checkbox' checked='checked' name='science'/>
+                        <div class='control__indicator science'></div>
+                    </label>
+                    <!-- tab trigger -->
+                    <input id='tab-science' type='checkbox' name='tabs'>
+                    <label for='tab-science'>+</label>
+
+                    <!-- tab content -->
+                    <div class='tab-content'>
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox science'>Pharmacy
+                            <input type='checkbox' checked='checked' name='Pharmacy'/>
+                            <div class='control__indicator science'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox science'>Science
+                            <input type='checkbox' checked='checked' name='Science'/>
+                            <div class='control__indicator science'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox science'>Data Science &amp Analytics
+                            <input type='checkbox' checked='checked' name='Data Science & Analytics'/>
+                            <div class='control__indicator science'></div>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- BUSINESS -->
+                <div class='tab'>
+                    <!-- filter trigger -->
+                    <label class='control control--checkbox faculty-checkbox'>Business
+                        <input type='checkbox' checked='checked' name='business'/>
+                        <div class='control__indicator business'></div>
+                    </label>
+                    <!-- tab trigger -->
+                    <input id='tab-business' type='checkbox' name='tabs'>
+                    <label for='tab-business'>+</label>
+
+                    <!-- tab content -->
+                    <div class='tab-content'>
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox business'>Business Admin
+                            <input type='checkbox' checked='checked' name='Business Admin'/>
+                            <div class='control__indicator business'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox business'>Accountancy
+                            <input type='checkbox' checked='checked' name='Accountancy'/>
+                            <div class='control__indicator business'></div>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ARTS & SOCIAL SCIENCES -->
+                <div class='tab'>
+                    <!-- filter trigger -->
+                    <label class='control control--checkbox faculty-checkbox'>FASS
+                        <input type='checkbox' checked='checked' name='fass'/>
+                        <div class='control__indicator fass'></div>
+                    </label>
+                    <!-- tab trigger -->
+                    <input id='tab-fass' type='checkbox' name='tabs'>
+                    <label for='tab-fass'>+</label>
+
+                    <!-- tab content -->
+                    <div class='tab-content'>
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox fass'>Arts &amp Social Sciences
+                            <input type='checkbox' checked='checked' name='Arts & Social Sciences'/>
+                            <div class='control__indicator fass'></div>
+                        </label>
+                        </div>
+
+                        <div class='filter-label'>
+                        <label class='control control--checkbox course-checkbox fass'>Arts &amp Social Sciences (MT)
+                            <input type='checkbox' checked='checked' name='Arts & Social Sciences (MT)'/>
+                            <div class='control__indicator fass'></div>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ENVIRONMENTAL STUDIES -->
+                <div class='tab'>
+                    <label class='control control--checkbox course-checkbox environment'>Environmental Studies
+                        <input type='checkbox' checked='checked' name='Environmental Studies'/>
+                        <div class='control__indicator environment'></div>
+                </div>
+
+
             </div>
         </div>
             <!-- CHART STARTS HERE -->

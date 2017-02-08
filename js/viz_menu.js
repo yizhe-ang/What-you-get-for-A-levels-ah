@@ -9,28 +9,21 @@
 		viz.keyDim.filter();
 		viz.courseDim.filter();
 		viz.uasDim.filter();
+
+		// check all checkboxes
+		d3.selectAll('label.control--checkbox input') 
+			.each(function() {
+			var input = d3.select(this);
+
+			input.property('checked', true);
+		});
+
 	};
 
 
-	// GENERAL SORT FUNCTION
-	var sortData = function(data) {
-		if (sortStatus === null) { // does nothing if sort is not toggled
-			return;
-		}	
+	
 
-		else if (sortStatus) { // sorts descending if true
-			data.sort(function(a, b) {
-				return parseFloat(b.uas)-parseFloat(a.uas);
-			});
-		}
-		
-		else { // sorts ascending if toggled again
-			data.sort(function(a, b) {
-				return parseFloat(a.uas)-parseFloat(b.uas);
-			});
-		}
-		return data;
-	};
+
 
 
 
@@ -38,18 +31,16 @@
 
 
 	// SORT
-	var sortStatus = null;
 	var sortButton = d3.select('#sort-button');
 
 	sortButton.on('click', function(d) {
-		if (sortStatus === null) {
-			sortStatus = false;
+		if (viz.sortStatus === null) {
+			viz.sortStatus = false;
 		}
-		sortStatus = !sortStatus;
-		var data = viz.keyDim.top(Infinity);
-		data = sortData(data);
+		viz.sortStatus = !viz.sortStatus;
+
 		// update the bar chart
-		viz.sortBars(data);
+		viz.sortBars();
 	});
 
 
@@ -62,7 +53,7 @@
 
 	resetButton.on('click', function(d) {
 		resetData();
-		sortStatus = null; // resets sort status too
+		viz.sortStatus = null; // resets sort status too
 		viz.updateBar();
 	});
 
@@ -100,8 +91,7 @@
 			// filters courses according to computed UAS
 			console.log(totalUAS);
 			filterByUAS(totalUAS);
-			sortData();
-			viz.updateBar(viz.data);
+			viz.updateBar();
 		}
 
 	});
@@ -124,12 +114,16 @@
 
 	// function that filters dataset based on UAS score
 	var filterByUAS = function(totalUAS) {
-		// resets working data first
-		resetData();
-		viz.data = viz.data.filter(function(d) {
-			return d.uas <= totalUAS;
+		// resets uas filter first
+		viz.uasDim.filter();
+		// filters for courses in which uas is lesser than input uas
+		viz.uasDim.filter(function(d) {
+			return d <= totalUAS;
 		});
-		console.log(viz.data);
+		// viz.data = viz.data.filter(function(d) {
+		// 	return d.uas <= totalUAS;
+		// });
+		// console.log(viz.data);
 		
 	};
 
@@ -153,7 +147,7 @@
 		viz.courseDim.filter(function(d) {
 			// if course is in filter list, filter for it
 			return filterList.indexOf(d) > -1;
-		})
+		});
 	};
 
 

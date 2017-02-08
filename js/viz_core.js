@@ -31,7 +31,26 @@
 	// viz.getFilteredData = function() {
 
 	// };
+	// GENERAL SORT FUNCTION
+	viz.sortStatus = null;
+	viz.sortData = function(data) {
+		if (viz.sortStatus === null) { // does nothing if sort is not toggled
+			return data;
+		}	
 
+		if (viz.sortStatus) { // sorts descending if true
+			data.sort(function(a, b) {
+				return parseFloat(b.uas)-parseFloat(a.uas);
+			});
+		}
+		
+		else { // sorts ascending if toggled again
+			data.sort(function(a, b) {
+				return parseFloat(a.uas)-parseFloat(b.uas);
+			});
+		}
+		return data;
+	};
 
 	// CROSSFILTER FUNCTION
 	viz.makeFilterAndDimensions = function(data) {

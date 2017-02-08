@@ -58,7 +58,8 @@
 
 
 	// FUNCTION THAT UPDATES POSITON OF BARS
-	viz.sortBars = function(data) {
+	viz.sortBars = function() {
+		var data = viz.sortData( viz.keyDim.top(Infinity) );
 		yScale.domain(data.map(function(d) { return d.course; }));
 		yAxis.scale(yScale);
 		svg.select('.y_axis')
@@ -182,7 +183,9 @@
 
 	// FUNCTION THAT ADDS OR REMOVES BARS
 	viz.updateBar = function() {
-		var data = viz.keyDim.top(Infinity);
+		// gets latest working data and sorts accordingly
+		var data = viz.sortData( viz.keyDim.top(Infinity) );
+		
 		// updates y scale first
 		yScale.rangeRoundBands([0, 30*data.length], 0.3)
 				.domain(data.map(function(d) {

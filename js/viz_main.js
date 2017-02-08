@@ -11,7 +11,7 @@
         // changes all the keys from strings to numbers
         data.forEach(function(d) {
             d.key = +d.key;
-        })
+        });
     	viz.initData = data; // stores the original data
     	// clones the original daata as a working data copy
     	viz.initData.forEach(function(object) {
