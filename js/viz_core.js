@@ -3,82 +3,87 @@
 (function(viz) {
 	'use strict';
 
-	viz.data = []; // the main data object
-	viz.initData = []; // a copy of the original data
+	// DESIGNATED COLORS FOR EACH FACULTY
+	viz.COLORS = { Engineering:'#BCAAA4',
+				   Science:'#80CBC4',
+				   DesignEnvironment:'#FFCC80',
+				   FASS:'#FFF59D',
+				   Business:'#B39DDB',
+				   Computing:'#90CAF9',
+				   Medicine:'#EF9A9A',
+				   Law:'#F48FB1',
+				   EnvironmentalStudies:'#C5E1A5' };
+
+	// STORED DATA
+	viz.uasData;
+	viz.genderData;
+	viz.salaryData;
+	// stores input uas
+	viz.uasData = 90.0;
 
 	// DIMENSIONS
-	viz.margin = { top:50, right:50, bottom:20, left:150 };
+	viz.margin = { top:80, right:50, bottom:20, left:150 };
 	viz.w = 960 - viz.margin.left - viz.margin.right;
-	viz.h = 1000 - viz.margin.top - viz.margin.bottom;
+	viz.h = 950 - viz.margin.top - viz.margin.bottom;
+
+	// GENERAL STRIP FUNCTION
+	viz.strip = function(string) {
+		return string.replace(/ /g, '')
+						.replace(/[^a-zA-Z0-9]/g,'');
+	};
 
 	// KEY FUNCTION
 	viz.key = function(d) {
 	    return d.course;
 	};
 
-	// viz.filterByFaculty = function(faculty) {
-
-	// };
-
-	// viz.filterByCourse = function(course) {
-
-	// };
-
-	// viz.updateChart = function(data) {
-
-	// };
-
-	// viz.getFilteredData = function() {
-
-	// };
-	// GENERAL SORT FUNCTION
-	viz.sortStatus = null;
-	viz.sortData = function(data) {
-		if (viz.sortStatus === null) { // does nothing if sort is not toggled
-			return data;
-		}	
-
-		if (viz.sortStatus) { // sorts descending if true
-			data.sort(function(a, b) {
-				return parseFloat(b.uas)-parseFloat(a.uas);
-			});
-		}
-		
-		else { // sorts ascending if toggled again
-			data.sort(function(a, b) {
-				return parseFloat(a.uas)-parseFloat(b.uas);
-			});
-		}
-		return data;
-	};
-
 	// CROSSFILTER FUNCTION
-	viz.makeFilterAndDimensions = function(data) {
-		// add the filter and create category dimensions
-		viz.filter = crossfilter(data);
+	viz.makeFilterAndDimensions = function() {
+		// SCORE FILTER
+		viz.scorefilter  = crossfilter(viz.uasData);
 		// KEY dimension
-		viz.keyDim = viz.filter.dimension(function(o) {
+		viz.scoreKeyDim = viz.scorefilter.dimension(function(o) {
 			return o.key;
 		});
-		// FACULTY dimension
-		viz.facultyDim = viz.filter.dimension(function(o) {
-			return o.faculty;
+		// VALUE dimension
+		viz.scoreValueDim = viz.scorefilter.dimension(function(o) {
+			return o.value;
 		});
-		// COURSE dimension
-		viz.courseDim = viz.filter.dimension(function(o) {
-			return o.course;
+
+
+		// SALARY FILTER
+		viz.salaryFilter = crossfilter(viz.salaryData);
+		viz.salaryValueDim = viz.salaryFilter.dimension(function(o) {
+			return o.value;
 		});
-		// UAS dimension
-		viz.uasDim = viz.filter.dimension(function(o) {
-			return o.uas;
+		viz.employmentDim = viz.salaryFilter.dimension(function(o) {
+			return +o.employment;
+		});
+
+		// GENDER FILTER
+		viz.genderFilter = crossfilter(viz.genderData);
+		viz.genderValueDim = viz.genderFilter.dimension(function(o) {
+			return o.value;
 		});
 	};
 
 	// FUNCTION THAT IS CALLED WHENEVER DATASET CHANGES
+	viz.selectedData = 'Score'; // default chart when first initialized is scores
 	viz.onDataChange = function() {
-		// var data = viz.data;
-		// viz.updateBar(data); 
-		viz.updateDimensions();
+		// first checks for the selected data
+		// activates the respective chart
+		if (viz.selectedData=='Score') {
+			viz.updateUAS();
+		}
+		if (viz.selectedData=='Gender') {
+			viz.updateGender();
+		}
+		if (viz.selectedData=='Salary') {
+			viz.updateSalary();
+		}
+		if (viz.selectedData=='Employment') {
+			viz.updateEmployment();
+		}
 	};
 
 	// RESIZES CHART ACCORDING TO WINDOW SIZE

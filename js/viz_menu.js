@@ -3,47 +3,100 @@
 (function(viz) {
 	'use strict';
 
-	// GENERAL RESET FUNCTION
-	// simply resets the working data
-	var resetData = function() {
-		viz.keyDim.filter();
-		viz.courseDim.filter();
-		viz.uasDim.filter();
+	// INITIALIZE MENU
+	viz.initMenu = function() {
+		var data = viz.scoreKeyDim.top(Infinity);
 
-		// check all checkboxes
-		d3.selectAll('label.control--checkbox input') 
-			.each(function() {
-			var input = d3.select(this);
+		// creates a nest based on faculty
+		var dataByFaculty = d3.nest()
+								.key(function(d) { return d.faculty; })
+								.entries(data);
 
-			input.property('checked', true);
+		// attaches the nested data to 'tab' container (created for each faculty)
+		d3.selectAll('.tab').remove();
+		var tabGroup = d3.select('#tab-group');
+		var tab = tabGroup.selectAll('.tab')
+						.data(dataByFaculty)
+						.enter()
+						.append('div').attr('class', 'tab')
+										.attr('id', function(d) { 
+											var faculty = viz.strip(d.key);
+											return faculty+'-tab'; 
+										});
+
+		// creates the tab header
+		tab.append('div').attr('class', 'tab-header');
+		// creates the label
+		tab.select('.tab-header')
+							.append('label').attr('class', 'filter-label faculty-checkbox')
+											.text(function(d) { return d.key; } )
+							// input checkbox
+							.append('input').attr('type', 'checkbox')
+											// .attr('checked', 'checked')
+											.attr('name', function(d) { return viz.strip(d.key); } );
+		// checkbox indicator
+		tab.select('.faculty-checkbox')
+			.append('div').attr('class', function(d) { 
+				return 'filter-indicator '+viz.strip(d.key); });
+
+
+
+		// FILTER COURSES
+		var facultyInput = d3.selectAll('.faculty-checkbox input');
+		var coursesInput  = d3.selectAll('.course-checkbox input');
+
+		// when FACULTY LABEL is changed, update colors of chart
+		facultyInput.on('change', function() {
+			if (viz.selectedData=='Gender') { // ignore for gender chart
+				return;
+			}
+			colorBars();
 		});
 
 	};
 
-
-	
-
-
-
-
-
-
-
-
-	// SORT
-	var sortButton = d3.select('#sort-button');
-
-	sortButton.on('click', function(d) {
-		if (viz.sortStatus === null) {
-			viz.sortStatus = false;
-		}
-		viz.sortStatus = !viz.sortStatus;
-
-		// update the bar chart
-		viz.sortBars();
-	});
+	var colorBars = function() {
+		var facultyInput = d3.selectAll('.faculty-checkbox input');
+		facultyInput.each(function() {
+			var input = d3.select(this);
+			var checked = input.property('checked');
+			var faculty = viz.strip(input.property('name'));
+			var rects = d3.selectAll('svg .'+faculty);
+			if (checked) {
+				rects.transition().style('fill', viz.COLORS[faculty]);
+			}
+			else {
+				rects.transition().style('fill', 'gainsboro');
+			}
+		});
+	};
 
 
+
+
+
+	// GENERAL RESET FUNCTION
+	// simply resets the working data
+	var resetData = function() {
+		viz.uasData = 90.0;
+
+		// check all checkboxes
+		d3.selectAll('.tab input') 
+			.each(function() {
+			var input = d3.select(this);
+
+			input.property('checked', false);
+		});
+
+		// resets grade input
+		inputData = {};
+		inputGrades
+			.each(function() {
+				this.value = null;
+			});
+
+		viz.sortStatus = null; // resets sort status too
+	};
 
 
 
@@ -53,8 +106,8 @@
 
 	resetButton.on('click', function(d) {
 		resetData();
-		viz.sortStatus = null; // resets sort status too
-		viz.updateBar();
+		
+		viz.onDataChange();
 	});
 
 
@@ -77,24 +130,28 @@
 	inputGrades.on('input', function() {
 		var gradeNo = d3.select(this).attr('name'); 
 		var gradeData = this.value.toUpperCase();
-		console.log(gradeNo);
-		console.log(gradeData);
+
+
 		// stores the data if input is valid
 		if (gradeData in GRADES_PTS) {
 			inputData[gradeNo] = gradeData;
 		}
-		console.log(inputData);
-		// if all grades have been entered, calculate UAS
-		if (Object.keys(inputData).length == 6) {
-			console.log('calculate!');
-			var totalUAS = calculateGrade();
+		// verifies if all input have been entered
+		var inputCount = 0;
+		inputGrades.each(function() {
+			if (this.value !== '') {
+				inputCount++;
+			}
+		});
+		// if so, calculate UAS and update the bars
+		if (inputCount==6) {
+			viz.uasData = calculateGrade();
 			// filters courses according to computed UAS
-			console.log(totalUAS);
-			filterByUAS(totalUAS);
-			viz.updateBar();
+			// filterByUAS(viz.uasData);
+			viz.onDataChange();
 		}
-
 	});
+
 	// function that calculates UAS
 	var calculateGrade = function() {
 		var totalUAS = 0.0; // stores final UAS
@@ -114,80 +171,55 @@
 
 	// function that filters dataset based on UAS score
 	var filterByUAS = function(totalUAS) {
-		// resets uas filter first
-		viz.uasDim.filter();
 		// filters for courses in which uas is lesser than input uas
-		viz.uasDim.filter(function(d) {
+		viz.scoreUasDim.filter(function(d) {
 			return d <= totalUAS;
 		});
-		// viz.data = viz.data.filter(function(d) {
-		// 	return d.uas <= totalUAS;
-		// });
-		// console.log(viz.data);
-		
+		viz.salaryUasDim.filter(function(d) {
+			return d <= totalUAS;
+		});
+		viz.genderUasDim.filter(function(d) {
+			return d <= totalUAS;
+		});
+
 	};
 
 
-	// function that checks through all the filter inputs and updates the crossfilter accordinly
-	var filterByCourse = function() {
-		// resets the course filter first
-		viz.courseDim.filter();
-		// list of courses to be included
-		var filterList = [];
-		// selects all inputs and starts the loop
-		coursesInput.each(function() {
+
+
+	// DATA SELECTION BUTTONS
+	var dataSelection = d3.selectAll('.data-selection input');
+	// when selection button is clicked, update selection data and activate the respective chart
+	dataSelection.on('change', function() {
+		dataSelection.each(function() {
 			var input = d3.select(this);
 			var checked = input.property('checked');
-			var course = input.property('name');
-			// if checked, filter for that course
 			if (checked) {
-				filterList.push(course);
+				viz.selectedData = input.property('value');
 			}
 		});
-		viz.courseDim.filter(function(d) {
-			// if course is in filter list, filter for it
-			return filterList.indexOf(d) > -1;
-		});
-	};
+		viz.onDataChange();
+	});
 
 
-
-
-	// FILTER COURSES
-	
-	var facultyInput = d3.selectAll('label.faculty-checkbox input');
-	var coursesInput  = d3.selectAll('label.course-checkbox input');
-
-	// when FACULTY LABEL is clicked, update the checkboxes of the rest of the courses
-	// then updates the crossfilter
-	facultyInput.on('change', function() {
-
+	// SIDEBAR TOGGLER
+	var sidebarToggler = d3.select('input#sidebartoggler');
+	sidebarToggler.on('change', function() {
 		var input = d3.select(this);
-
 		var checked = input.property('checked');
-		console.log(checked);
-		var faculty = input.property('name');
-		console.log(faculty);
 
-		// uncheck/check the rest of the courses
-		d3.selectAll('label.'+faculty+' input') 
-			.each(function() {
-			var input = d3.select(this);
-
-			input.property('checked', checked);
-		});
-
-		filterByCourse();
-		viz.updateBar();
-
+		if (checked) {
+			d3.select('#sidebar')
+				.style('left', '0px');
+		}
+		else {
+			d3.select('#sidebar')
+				.style('left', '-300px');
+		}
 	});
+	
 
-	// when COURSE LABEL is changed, loop through all the inputs and 
-	// update the crossfilter and hence bar chart
-	coursesInput.on('change', function() {
-		filterByCourse();
-		viz.updateBar();
-	});
+	
 
 
 }(window.viz = window.viz || {}));

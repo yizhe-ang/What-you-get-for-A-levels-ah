@@ -34,23 +34,59 @@ header #title {
 
 h1#logo {
 	margin-top:0;
-	margin-bottom:10px;
+	margin-bottom:0;
 	text-align: center;
 	font-family: 'Vidaloka', serif;
-	font-size:48px;
+	font-size:38px;
 	font-weight:600;
 }
 
 #grades-input {
-	max-width: 400px;
+	max-width: 440px;
 	height: auto;
 	margin: 0 auto;
 	font-family: 'Overpass', sans-serif;
 	font-weight:600;
-	font-size: 48px;
+	font-size: 32px;
+	padding:0;
 }
 
 
+/* FOOTER SHIZZ */
+#footer {
+	width:100%;
+	height:110px;
+	background-color:#EEEEEE;
+	/*border-top:1px solid black;*/
+}
+#footer-content {
+	padding-top:10px;
+	/*padding-bottom: 20px;*/
+	padding-right:50px;
+	max-width: 960px;
+	height: auto;
+	margin: 0 auto;
+	font-family: 'Overpass', sans-serif;
+	text-align: right;
+	font-size:14px;
+}
+#source-link {
+	display:inline-block;
+	background-color:white;
+	padding-left:10px;
+	/*padding-bottom:5px;*/
+	padding-right:5px;
+	padding-top:10px;
+	margin-bottom:5px;
+}
+#footer a {
+	text-decoration: none;
+	color: black;
+	font-weight:600;
+}
+#footer p {
+	margin-bottom:5px;
+}
 
 /* SIDEBAR SHIZZ */
 #sidebar {
@@ -59,8 +95,8 @@ h1#logo {
 	top: 0px;
 	bottom: 0px;
 	left: -300px;
-	width: 300;
-	padding-top: 30px;
+	width: 200;
+	/*padding-top: 30px;*/
 	overflow-y: scroll;
 	/*padding: 30px;*/
 	background-color: white;
@@ -72,7 +108,7 @@ h1#logo {
 }
 
 .toggle {
-	position:fixed;
+/*	position:fixed;
 	top: 120px;
 	left: 300px;
 	z-index:1000;
@@ -80,70 +116,81 @@ h1#logo {
 	font-size: 16px;
 	font-family: 'Overpass Mono', monospace;
 	color: gray;
-	cursor: pointer;
+	cursor: pointer;*/
+	position:relative;
+	top:10px;
+	/*left:850px;*/
+	text-decoration: none;
+	cursor:pointer;
+	z-index:998;
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+.toggle div {
+	font-size:12px;
+	padding: 0 5px;
+	font-family: 'Overpass Mono', monospace;
+	/*font-family: 'Overpass', sans-serif;*/
+	/*font-family: 'Vidaloka', serif;*/
+	background-color:black;
+	color:white;
+	display:inline-block;
+	font-weight:400;
+	/*letter-spacing: 2px;*/
 }
 
 #sidebartoggler {
 	display:none;
 }
 
-#sidebartoggler:checked ~ #sidebar {
+/*#sidebartoggler:checked ~ #sidebar {
 	left: 0px;
-}
+}*/
 
 /* FILTER LABELS SHIZZ */
-
-.control {
+.filter-label {
 	font-family: 'Overpass', sans-serif;
 	font-size: 16px;
 	position: relative;
-	display:block;
-	/*margin-bottom: 15px;*/
+	/*display:block;*/
+	padding:0px;
+	margin:0;
 	padding-left: 45px;
 	cursor:pointer;
+	display:inline-block;
 }
 
-.control input {
+input[type='checkbox'],input[type='radio'] {
 	position: absolute;
-	z-index:-1;
-	opacity:0;
+	left: 0;
+	top: 0;
+	z-index: -999;
+	opacity: 0;
 }
 
-.control__indicator {
+.filter-indicator {
 	position: absolute;
-	top: -4px;
+	top: -1px;
 	left: 15px;
 	width: 20px;
 	height: 20px;
-	background: #e6e6e6;
+	/*border: 1px solid black;*/
+	background: lightgray;
 }
-/* Hover and focus states */
-.control:hover input ~ .control__indicator,
-.control input:focus ~ .control__indicator {
-	/*background: #ccc;*/
-}
-/* Checked state */
-/*.control input:checked ~ .control__indicator {
-	background: black;
-}*/
-.control input:checked 
-/* Hover state whilst checked */
-.control:hover input:not([disabled]):checked ~ .control__indicator,
-.control input:checked:focus ~ .control__indicator {
-	/*background: black;*/
-}
+
 /* Check mark */
-.control__indicator:after {
+.filter-indicator:after {
 	position: absolute;
 	display: none;
 	content: '';
 }
 /* Show check mark */
-.control input:checked ~ .control__indicator:after {
+.filter-label input:checked ~ .filter-indicator:after {
 	display: block;
 }
 /* Checkbox tick */
-.control--checkbox .control__indicator:after {
+/*.filter-label .filter-indicator:after {
 	top: 4px;
 	left: 8px;
 	width: 3px;
@@ -151,6 +198,12 @@ h1#logo {
 	transform: rotate(45deg);
 	border: solid #fff;
 	border-width: 0 2px 2px 0;
+	border-color:black;
+}*/
+
+/* Checkbox color */
+.filter-label input:checked ~ .filter-indicator {
+	background: black;
 }
 
 
@@ -182,7 +235,8 @@ button#sort-button:active {
       font-weight: 600;
       font-size: 14px;
       margin: 0 auto;
-      margin-bottom: 15px;
+      /*margin-left:20px;*/
+      margin-bottom: 20px;
       -moz-transition: all 0.3s;
       -o-transition: all 0.3s;
       -webkit-transition: all 0.3s;
@@ -202,6 +256,7 @@ button#sort-button:active {
       font-weight: 600;
       font-size: 14px;
       margin: 0 auto;
+      /*margin-left:20px;*/
       margin-bottom: 15px;
       -moz-transition: all 0.3s;
       -o-transition: all 0.3s;
@@ -211,58 +266,105 @@ button#sort-button:active {
     }
 
 
+    /* DATA SELECTION BUTTONS */
+    #selection {
+    	padding: 0;
+    	/*background-color:gainsboro;*/
+    	/*border-bottom:1px solid gainsboro;*/
+    	margin-bottom:20px;
+    }
+    .data-selection {
+    	/*width:100%;*/
+    	font-family: 'Overpass', sans-serif;
+    	font-family: 'Vidaloka', serif;
+    	font-weight:400;
+    	margin:0;
+    	padding:10px 0;
+    	border-bottom:1px solid gainsboro;
+    	/*padding-left:20px;*/
+    	display:block;
+
+    }
+    .data-selection div {
+    	width:100%;
+    	display:inline-block;
+    	cursor: pointer;
+    	-moz-transition: all 0.3s;
+    	-o-transition: all 0.3s;
+    	-webkit-transition: all 0.3s;
+    	transition: all 0.3s; 
+    	font-size:22px;
+    	color:silver;
+    	text-align:center;
+    }
+    .data-selection input:checked + div {
+    	/*border-bottom: 2px solid red;*/
+    	/*font-size:24px;*/
+    	color:black;
+    	font-weight:600;
+    	-moz-transition: all 0.3s;
+    	-o-transition: all 0.3s;
+    	-webkit-transition: all 0.3s;
+    	transition: all 0.3s; 
+    }
+
+
 /* ACCORDION SHIZZ */
-.tab-group {
-	margin: 30px 0;
-	width: 100%;
+#tab-group {
+	margin: 0;
+	/*margin-top:10px;*/
+	width: 250px;
 	/*padding: 30px;*/
 }
 
 .tab {
 	position: relative;
 	width: 100%;
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 	/*margin: 5px;*/
 	/*margin-top: 10px;*/
 	/*border-top: 1px solid gainsboro;*/
 }
 
-.tab input {
+.tab-header {
+	width: 100%;
+	background-color: white;
+	border-top:1px solid gainsboro;
+	padding: 10px 0;
+}
+
+/*.tab input {
 	position: absolute;
 	left: 0;
 	top: 0;
 	z-index: -999;
 	opacity: 0;
 }
+*/
 
-.tab label:nth-child(1) {
-	display: inline;
-	margin-right: 3px;
-}
 
-.tab label:nth-child(3) {
-	display: inline;
+.accordion-label {
+	display: inline-block;
+	/*float:right;*/
 	transition: letter-spacing .55s;
 	font-family: 'Overpass', sans-serif;
 	font-size: 18px;
-	color: lightgrey;
+	color: black;
+	margin-left: 5px;
 }
-.tab label:nth-child(3):hover {
+
+.accordion-label:hover {
 	color:black;
+	cursor:pointer;
 }
 
-
-.tab label:hover {
-	cursor: pointer;
-}
-
-/* when + is hovered or focused */
-/*.tab input:focus + label,
-.tab label:hover {
-	color: red;
+/* when + is hovered or focused 
+.accordion-label:focus,
+.accordion-label:hover {
+	color: black;
 }
 */
-.tab input:checked + label {
+.accordion-label input:checked {
 	color: black;
 }
 
@@ -279,25 +381,23 @@ button#sort-button:active {
 	transition: all 0.8s; 
 }
 
-
-
-.filter-label {
+.filter-labels {
 	width: auto;
 	display: block;
 	padding-bottom: 8px;
 	/*padding: 10px 0;*/
 }
 
-.filter-label:first-child {
+.filter-labels:first-child {
 	padding-top: 8px;
 }
 
-.tab input:checked ~ .tab-content {
+.tab-header input:checked ~ .tab-content {
 	max-height: 1000px;
 }
 
 .course-checkbox {
-	font-size: 15px;
+	/*font-size: 15px;*/
 	/*font-weight: 600;*/
 }
 .faculty-checkbox {
@@ -314,7 +414,7 @@ input[type='text'] {
 	margin: 0;
 	width: 50px;
 	font-family: 'Overpass', sans-serif;
-	font-size: 48px;
+	font-size: 38px;
 	font-weight: 600;
 	appearance: none;
 	box-shadow: none;
@@ -396,81 +496,85 @@ svg {
 	stroke-width: 0;
 }
 
-.control input:checked ~ .control__indicator {
+input[type='checkbox']:checked + div {
 	background: black;
 }
 
 /* BARS COLORS */
-/*.engineering {
-	fill:#BCAAA4;
-	background:#BCAAA4;
-}
-.control input:checked ~ .control__indicator.engineering {
-	background:#BCAAA4;
-}
+rect {
+	fill:gainsboro;
 
-.science {
-	fill:#80CBC4;
-	background-color:#80CBC4;
 }
-.control input:checked ~ .control__indicator.science {
-	background:#80CBC4;
-}
-
-.design {
-	fill:#B39DDB;
-	background-color:#B39DDB;
-}
-.control input:checked ~ .control__indicator.design {
-	background:#B39DDB;
-}
-
-.fass {
-	fill:#FFF59D;
-	background-color:#FFF59D;
-}
-.control input:checked ~ .control__indicator.fass {
-	background:#FFF59D;
-}
-
-.business{
-	fill:#B0BEC5;
-	background-color:#B0BEC5;
-}
-.control input:checked ~ .control__indicator.business {
-	background:#B0BEC5;
-}
-
-.computing {
+/*.Engineering {
 	fill:#80DEEA;
-	background-color:#80DEEA;
-}
-.control input:checked ~ .control__indicator.computing {
+	background:#80DEEA;
+}*/
+.filter-label input:checked ~ .filter-indicator.Engineering {
 	background:#80DEEA;
 }
 
-.medicine {
-	fill:#FF8A80;
-	background-color:#FF8A80;
+/*.Science {
+	fill:#80CBC4;
+	background-color:#80CBC4;
+}*/
+.filter-label input:checked ~ .filter-indicator.Science {
+	background:#80CBC4;
 }
-.control input:checked ~ .control__indicator.medicine {
-	background:#FF8A80;
+/*
+.DesignEnvironment {
+	fill:#FFCC80;
+	background:#FFCC80;
+}*/
+.filter-label input:checked ~ .filter-indicator.DesignEnvironment {
+	background:#FFCC80;
 }
 
-.law {
-	fill:#F48FB1;
+/*.FASS {
+	fill:#FFF59D;
+	background-color:#FFF59D;
+}*/
+.filter-label input:checked ~ .filter-indicator.FASS {
+	background:#FFF59D;
 }
-.control input:checked ~ .control__indicator.law {
+
+/*.Business{
+	fill:#FFAB91;
+	background-color:#FFAB91;
+}*/
+.filter-label input:checked ~ .filter-indicator.Business {
+	background:#B39DDB;
+}
+
+/*.Computing {
+	fill:#81D4FA;
+	background-color:#81D4FA;
+}*/
+.filter-label input:checked ~ .filter-indicator.Computing {
+	background:#90CAF9;
+}
+
+/*.Medicine {
+	fill:#EF9A9A;
+	background-color:#EF9A9A;
+}*/
+.filter-label input:checked ~ .filter-indicator.Medicine {
+	background:#EF9A9A;
+}
+
+/*.Law {
+	fill:#F48FB1;
+}*/
+.filter-label input:checked ~ .filter-indicator.Law {
 	background:#F48FB1;
 }
 
-.environment {
+/*.EnvironmentalStudies {
 	fill:#C5E1A5;
 	background-color:#C5E1A5;
-}
-.control input:checked ~ .control__indicator.environment {
-	background:#C5E1A5;
 }*/
+.filter-label input:checked ~ .filter-indicator.EnvironmentalStudies {
+	background:#C5E1A5;
+}
 
 /* rect shenenigains */
 /*rect {
@@ -480,10 +584,10 @@ svg {
         transition: all 0.2s; 
 }*/
 
-rect {
-	fill:gainsboro;
-
-}
+/*
+rect:hover {
+	stroke:grey;
+}*/
 
 /*rect:hover {
 	opacity:1.0;
@@ -518,21 +622,61 @@ rect {
 #tooltip p {
 	margin:0;
 }
-
-#course_name {
+#tooltip div:first-child {
+	margin-top: 5px;
+}
+#course-name {
 	margin: 0;
 	font-family: 'Overpass', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
-
 }
 
-#uas_value {
+#main-value {
 	margin: 0;
 	font-family: 'Overpass Mono', monospace;
+	font-family: 'Overpass', sans-serif;
 	font-size: 32px;
-	font-weight: 600;
+	font-weight: 700;
 	display: inline-block;
 	padding-top: 7px;
+}
+#male-value {
+	font-family: 'Overpass Mono', monospace;
+	font-family: 'Overpass', sans-serif;
+	font-size: 32px;
+	font-weight:700;
+	display: inline-block;
+	padding-right: 10px;
+	padding-top: 7px;
+	border-right: 2px solid black;
+	/*color: rgb(33,97,250);*/
+}
+#female-value {
+	font-family: 'Overpass Mono', monospace;
+	font-family: 'Overpass', sans-serif;
+	font-size: 32px;
+	font-weight:700;
+	display: inline-block;
+	padding: 0 10px;
+	padding-top: 7px;
+	/*color: rgb(255,51,51);*/
+}
+.value-header {
+	font-family: 'Overpass', sans-serif;
+	font-size: 15px;
+}
+.secondary-value {
+	font-family: 'Overpass Mono', monospace;
+	font-family: 'Overpass', sans-serif;
+	font-weight:700;
+	font-size:15px;
+	/*color:grey;*/
+}
 
+.chart-title {
+	font-family: 'Overpass', sans-serif;
+	font-weight:600;
+	/*fill:silver;*/
+	opacity:0.5;
 }
