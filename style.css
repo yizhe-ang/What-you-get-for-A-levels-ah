@@ -28,7 +28,6 @@ header #title {
 	padding-top:10px;
 	padding-bottom: 20px;
 	max-width: 960px;
-	min-width:700px;
 	height: auto;
 	margin: 0 auto;
 }
@@ -457,7 +456,6 @@ svg {
 
 #chart {
      max-width: 960px;
-     min-width:700px;
      margin: 0 auto;
 }
 

@@ -2,7 +2,15 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta id='vp' name="viewport" content="width=device-width, initial-scale:1.0, user-scalable=0" />
+        <script>
+            window.onload = function() {
+                if (screen.width<700) {
+                    var mvp = document.getElementById('vp');
+                    mvp.setAttribute('content', 'width=700');
+                }
+            }
+        </script>
         <title>What you get for 'A' Levels ah?</title>
         <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.js"></script>
