@@ -4,7 +4,7 @@
 	'use strict';
 
 	// IMPORTING OF DATASET        
-    queue()
+    d3.queue()
         .defer(d3.csv, 'data/nus_uas.csv')
         .defer(d3.csv, 'data/nus_gender.csv')
         .defer(d3.csv, 'data/nus_salary.csv')
