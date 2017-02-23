@@ -102,7 +102,7 @@
 
 	// UPDAES UAS CHART
 	viz.updateUAS = function() {
-		updateDimensions();
+		// updateDimensions();
 		var data = viz.scoreValueDim.top(Infinity);
 		// update footer
 		d3.select('#footer-content a')
@@ -205,7 +205,7 @@
 
 	// UPDATES GENDER CHART
 	viz.updateGender = function() {
-		updateDimensions();
+		// updateDimensions();
 		var data = viz.genderValueDim.top(Infinity);
 		// UPDATE LABELS
 		label
@@ -330,7 +330,7 @@
 
 	// INITIALIZES SALARY DATA AND CHART
 	viz.updateSalary = function() {
-		updateDimensions();
+		// updateDimensions();
 		var data = viz.salaryValueDim.top(Infinity);
 		// update footer
 		d3.select('#footer-content a')
@@ -468,7 +468,7 @@
 
 	// UPDATES EMPLOYMENT CHART
 	viz.updateEmployment = function() {
-	    updateDimensions();
+	    // updateDimensions();
 	    var data = viz.employmentDim.top(Infinity);
 	    // update footer
 	    d3.select('#footer-content a')
