@@ -93,9 +93,6 @@
 		if (winWidth > 960) {
 			winWidth = 960;
 		}
-		if (winWidth < 700) {
-			winWidth = 700;
-		}
 	    viz.w = winWidth - viz.margin.left - viz.margin.right;
 	};
 

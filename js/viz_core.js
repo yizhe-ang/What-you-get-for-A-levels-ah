@@ -23,7 +23,7 @@
 
 	// DIMENSIONS
 	viz.margin = { top:80, right:50, bottom:20, left:150 };
-	viz.w = 960 - viz.margin.left - viz.margin.right;
+	viz.w = 700 - viz.margin.left - viz.margin.right;
 	viz.h = 950 - viz.margin.top - viz.margin.bottom;
 
 	// GENERAL STRIP FUNCTION
