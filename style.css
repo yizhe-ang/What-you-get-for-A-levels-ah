@@ -511,7 +511,7 @@ rect {
 	background:#80DEEA;
 }*/
 .filter-label input:checked ~ .filter-indicator.Engineering {
-	background:#80DEEA;
+	background:#BCAAA4;
 }
 
 /*.Science {
